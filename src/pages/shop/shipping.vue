@@ -124,7 +124,7 @@
           >
         </el-form-item>
         <el-form-item>
-          <el-checkbox-group v-model="shopList.type">
+          <el-checkbox-group>
             <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
