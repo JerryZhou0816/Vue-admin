@@ -6,10 +6,6 @@ import store from "./store";
 import axios from "./common/axios";
 import filters from "./filters";
 import VueProgressBar from "vue-progressbar";
-// import Element from "element-ui";
-// import "element-ui/lib/theme-default/index.css";
-
-// import Element from "element-ui";
 
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
@@ -55,6 +51,9 @@ Object.keys(filters).forEach(key => {
 
 // 创建实例
 new Vue({
+  beforeCreate() {
+    Vue.prototype.$bus = this
+  },
   store,
   router,
   el: "#root",

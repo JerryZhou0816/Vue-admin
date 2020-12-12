@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form ref="form"  label-width="100px">
-     
+     <!-- 图片 -->
        <el-form-item label="产品图片">
           <el-upload
               action="https://jsonplaceholder.typicode.com/posts/"
@@ -10,50 +10,49 @@
           </el-upload>
            <el-dialog :visible.sync="dialogVisible">
           <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
-        
+        </el-dialog> 
        </el-form-item>
-
-			
-     
-
+       <!-- 状态 -->
         <el-form-item label="状态">
           <el-radio-group >
             <el-radio v-model="radio" label="1">上架</el-radio>
             <el-radio v-model="radio" label="2">下架</el-radio>
           </el-radio-group>
         </el-form-item>
-       
+        <!-- 产品分类 -->
          <el-form-item label="产品分类">
            <el-select placeholder="请选择" style="width:190px;">
              <el-optio>
              </el-optio>
            </el-select>
         </el-form-item>
-
+        <!-- 产品分组 -->
          <el-form-item label="产品分组">
            <el-select placeholder="请选择" style="width:220px;">
              <el-optio>
              </el-optio>
            </el-select>
         </el-form-item>
-
+        <!-- 产品名称 -->
          <el-form-item label="产品名称">
            <el-input placeholder="产品名称" style="width:360px;"></el-input>
         </el-form-item>
-	
-     <el-form-item label="产品卖点">
-           
-         <el-input placeholder="产品卖点" type="textarea" rows="2" style="width:360px;"></el-input>
-       </el-form-item>
-
-		
+	      <!-- 产品卖点 -->
+        <el-form-item label="产品卖点"> 
+          <el-input placeholder="产品卖点" type="textarea" rows="2" style="width:360px;"></el-input>
+        </el-form-item>
+        <!-- 配送方式 -->
         <el-form-item label="配送方式">
-         <el-checkbox-group v-model="checkList">
-          <el-checkbox label="商家配送"></el-checkbox>
+         <el-checkbox-group  v-model="checkList">
+          <el-checkbox label="商家配送" @click="FreightConfiguration"></el-checkbox>
           <el-checkbox label="用户自提"></el-checkbox>
-        </el-checkbox-group>
+         </el-checkbox-group>
        </el-form-item>
+          <!-- 运费配置 -->
+        <el-form-item label="运费配置">
+           <el-input placeholder="规格名" style="width:190px;"></el-input>
+        </el-form-item>
+
  
         <el-form-item label="商品规格">
          <el-button >添加规格</el-button>
@@ -67,64 +66,64 @@
           <el-input placeholder="规格值" style="width:190px;"></el-input>
        </el-form-item>
  
-		
 			<el-form-item>
-         <el-button type="primary">保存</el-button>
-         <el-button >取消</el-button>
-       </el-form-item>
-      
+         <el-button type="primary" size="mini">确定</el-button>
+         <el-button  size="mini">取消</el-button>
+      </el-form-item>
 
+      <!-- 表格 -->
+			<el-form-item>
+         <el-table
+            :data="goodsList"
+           style="width: 100%" border>
+           <el-table-column
+             prop="prop"
+             label="销售价"
+            >
+            <el-input type="number"  style="width:120px;"></el-input>
+            
+           </el-table-column>
+           <el-table-column
+             prop="prop"
+             label="市场价"
+            >
+            <el-input type="number"  style="width:120px;"></el-input>
+           </el-table-column>
+           <el-table-column
+             prop="prop"
+             label="库存"
+             >
+            <el-input type="number"  style="width:120px;"></el-input>
+           </el-table-column>
+           <el-table-column
+             prop="prop"
+             label="商品重量(kg)"
+            >
+            <el-input type="number"  style="width:120px;"></el-input>
+           </el-table-column>
+           <el-table-column
+             prop="prop"
+             label="商品体积(m3)"
+            >
+            <el-input type="number"  style="width:120px;"></el-input>
+           </el-table-column>
+           <el-table-column
+             prop="prop"
+             label="操作"
+            >
+            <span>禁用</span>
+           </el-table-column>
+         </el-table>
+      </el-form-item>
+      
+      <!-- 产品详情 -->
+      <el-form-item label="产品详情">
+        <el-input type="textarea" v-model="model"></el-input>
+      </el-form-item>
 
       <el-form-item>
-       <el-table  style="width: 100%; margin: 10px 0 30px 0" border>
- 
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="销售价" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="商品原价" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="商品现价" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="商品库存" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="产品图片" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="状态" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="操作" >
-        </el-table-column>
-    </el-table>
-    </el-form-item>
-
-
-
-
-
-
-
-
-
-
+        <el-button type="primary" size="small">确定</el-button>
+      </el-form-item>
 
 
     </el-form>
@@ -143,7 +142,14 @@ export default {
   data(){
     return{
       dialogImageUrl: '',
-        dialogVisible: false
+      dialogVisible: false,
+      checkList:true,
+      model:'',
+      goodsList:[
+        {
+          nmu:0
+        }
+      ]
     }
   },
   methods: {
@@ -154,6 +160,7 @@ export default {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       }
+     
   }
 }
 </script>

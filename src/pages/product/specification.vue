@@ -83,6 +83,44 @@
      <!-- 分页 -->
      <Pagination></Pagination>
 
+     
+       <!-- dialog对话框，用于增加组件 -->
+    <el-dialog
+      title="新增"
+      :visible.sync="isShowDialog">
+      
+      <el-table
+        border
+        style="width: 100%"
+        :data="defaultList">
+        <el-table-column
+          prop="prop"
+          label="属性名称"
+          width="width">
+           <el-input placeholder="请输入内容"></el-input>
+
+        </el-table-column>
+        <el-table-column
+          prop="prop"
+          label="属性值"
+          width="width">
+             <el-input placeholder="请输入内容" style="width:150px;"></el-input>
+             <el-button type="primary" icon="el-icon-plus" ></el-button>
+
+        </el-table-column>
+
+      </el-table>
+
+
+
+
+
+    </el-dialog>
+
+
+
+
+
   </div>
 </template>
 
@@ -96,7 +134,19 @@ export default {
         region: ''
         
       },
+      isShowDialog: false,
+      defaultList:[
+        {
+         
+        }
+      ]
     }
+  },
+  methods:{
+    showAddDialog(){
+      this.isShowDialog = true;
+    },
+   
   }
 };
 </script>

@@ -99,6 +99,12 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <!-- dialog对话框，用于显示与隐藏组件 -->
+    <el-dialog title="多选" :visible.sync="isShowAndHide">
+      <el-transfer></el-transfer>
+      <el-input autocomplete="off"></el-input>
+    </el-dialog>
   </div>
 </template>
 
@@ -121,6 +127,9 @@ export default {
     showAddDialog() {
       this.isShowDialog = true;
     },
+    ShowAndHide() {
+      this.isShowAndHide = true;
+    },
     getTrademark() {
       this.$store.dispatch("getTradermark");
     }
@@ -137,9 +146,10 @@ export default {
 </script>
 
 <style>
-.el-col {
-  margin-bottom: -7px;
-}
+/* .el-col {
+  margin-bottom: 1px;
+ 
+} */
 .el-form-item {
   margin-bottom: 30px;
 }

@@ -7,10 +7,21 @@ export const reqUser = () => {
   });
 };
 
+
+
 //获取品牌数据
 export const reqTrademark = () => {
   return MockAjax({
     url: "/trademark",
+    method: "get"
+  });
+};
+
+
+//获取商品列表
+export const reqAllGood = () => {
+  return MockAjax({
+    url: "/allgoods",
     method: "get"
   });
 };
