@@ -1,0 +1,35 @@
+{
+    "records": [
+        {
+            "addrId": 7,
+            "addrName": "河南开封",
+            "addr": "鼓楼区鼓楼广场",
+            "mobile": "19000000000",
+            "provinceId": 410000000000,
+            "province": "河南省",
+            "cityId": 410200000000,
+            "city": "开封市",
+            "areaId": 410201000000,
+            "area": "市辖区",
+            "shopId": 1
+        },
+        {
+            "addrId": 6,
+            "addrName": "aadasda",
+            "addr": "aadasda",
+            "mobile": "12345123132",
+            "provinceId": 210000000000,
+            "province": "辽宁省",
+            "cityId": 210300000000,
+            "city": "鞍山市",
+            "areaId": 210304000000,
+            "area": "立山区",
+            "shopId": 1
+        }
+    ],
+    "total": 2,
+    "size": 10,
+    "current": 1,
+    "searchCount": true,
+    "pages": 1
+}

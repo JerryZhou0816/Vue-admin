@@ -91,22 +91,23 @@
       
       <el-table
         border
-        style="width: 100%">
+        style="width: 100%"
+        :data="defaultList">
         <el-table-column
           prop="prop"
           label="属性名称"
           width="width">
+           <el-input placeholder="请输入内容"></el-input>
+
         </el-table-column>
         <el-table-column
           prop="prop"
           label="属性值"
           width="width">
+             <el-input placeholder="请输入内容" style="width:150px;"></el-input>
+             <el-button type="primary" icon="el-icon-plus" ></el-button>
+
         </el-table-column>
-         <templeate>
-           <div>
-             <el-input placeholder="请输入内容"></el-input>
-           </div>
-         </templeate>
 
       </el-table>
 
@@ -134,6 +135,11 @@ export default {
         
       },
       isShowDialog: false,
+      defaultList:[
+        {
+         
+        }
+      ]
     }
   },
   methods:{

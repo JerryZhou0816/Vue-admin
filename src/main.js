@@ -7,35 +7,30 @@ import axios from "./common/axios";
 import filters from "./filters";
 import VueProgressBar from "vue-progressbar";
 
-// import Element from "element-ui";
-// import "element-ui/lib/theme-default/index.css";
-
-// import Element from "element-ui";
-
 import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
-
 import ImpPanel from "./components/panel.vue";
 //列表组件
-import CategoryList from '@/components/CategoryList'
+import CategoryList from "@/components/CategoryList";
 //分页
-import Pagination from '@/components/Pagination'
+import Pagination from "@/components/Pagination";
 //提示
-import HintButton from '@/components/HintButton'
-import Title from '@/components/Title'
-
+import HintButton from "@/components/HintButton";
+import Title from "@/components/Title";
+// mock
+import "./mock/mockServer";
+import "./api/mock-api";
 Vue.prototype.$http = axios;
 Vue.axios = axios;
 Vue.http = axios;
 Vue.use(axios);
 
-Vue.use(Element)
+Vue.use(Element);
 Vue.component(ImpPanel.name, ImpPanel);
-Vue.component('CategoryList', CategoryList)
-Vue.component('HintButton', HintButton)
-Vue.component('Pagination', Pagination)
-Vue.component('Title', Title)
-
+Vue.component("CategoryList", CategoryList);
+Vue.component("HintButton", HintButton);
+Vue.component("Pagination", Pagination);
+Vue.component("Title", Title);
 
 Vue.use(VueProgressBar, {
   color: "#eeeeee",

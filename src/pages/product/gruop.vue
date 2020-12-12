@@ -38,7 +38,7 @@
     </el-row>
 
     <!-- 表格 -->
-    <el-table style="width: 100%; margin: 20px 0" border>
+    <el-table style="width: 100%; margin: 10px 0" border>
       <el-table-column
         label="序号"
         type="index"
@@ -140,10 +140,10 @@ export default {
 </script>
 
 <style>
-.el-col {
-  margin-bottom: -7px;
+/* .el-col {
+  margin-bottom: 1px;
  
-}
+} */
 .el-form-item{
   margin-bottom: 30px;
 }
