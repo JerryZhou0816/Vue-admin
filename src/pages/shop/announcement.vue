@@ -22,7 +22,7 @@
           <el-button icon="el-icon-delete" size="small">清空</el-button>
         </el-form-item>
       </el-form>
-
+    
       <el-row :span="24">
         <el-col :span="20">
           <el-button type="primary" icon="el-icon-plus" size="small"
@@ -57,6 +57,14 @@
         <el-table-column property="address" label="是否置顶" align="center">
         </el-table-column>
         <el-table-column property="address" label="操作" align="center">
+            <template>
+            <el-button type="primary" icon="el-icon-edit" size="small"
+              >编辑</el-button
+            >
+            <el-button type="danger" icon="el-icon-delete" size="small"
+              >删除</el-button
+            >
+          </template>
         </el-table-column>
       </el-table>
       <!-- @size-change="handleSizeChange"
@@ -80,4 +88,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style >
+</style>

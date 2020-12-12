@@ -42,7 +42,7 @@
       <el-button type="text">清 空</el-button>
       <el-table
         ref="singleTable"
-        :data="tableData"
+        :data="shopList"
         highlight-current-row
         @current-change="handleCurrentChange"
         style="width: 100%; margin-top: 10px"
@@ -85,6 +85,14 @@
           align="center"
           width="259px"
         >
+          <template>
+            <el-button type="primary" icon="el-icon-edit" size="small"
+              >编辑</el-button
+            >
+            <el-button type="danger" icon="el-icon-delete" size="small"
+              >删除</el-button
+            >
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination
@@ -103,6 +111,16 @@
 <script>
 export default {
   name: "hotsearch",
+  data() {
+    return {
+      shopList: [
+        {
+          name: 1,
+          age: 2,
+        },
+      ],
+    };
+  },
 };
 </script>
 

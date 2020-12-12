@@ -6,7 +6,12 @@ import store from "./store";
 import axios from "./common/axios";
 import filters from "./filters";
 import VueProgressBar from "vue-progressbar";
-import ElementUI from "element-ui";
+// import Element from "element-ui";
+// import "element-ui/lib/theme-default/index.css";
+
+// import Element from "element-ui";
+
+import Element from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import ImpPanel from "./components/panel.vue";
 
@@ -36,6 +41,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key]);
 });
 
+// 创建实例
 new Vue({
   store,
   router,
