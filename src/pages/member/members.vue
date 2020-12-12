@@ -3,7 +3,7 @@
     <el-form :inline="true" :model="form" label-width="100px">
       <!-- 用户昵称及状态 -->
       <el-form-item label="用户昵称" label-width="70px">
-        <el-input v-model="model" placeholder="用户昵称"></el-input>
+        <el-input placeholder="用户昵称"></el-input>
       </el-form-item>
 
       <!-- 状态 -->
@@ -95,7 +95,6 @@
         :current-page="1"
         :page-sizes="[5, 7, 10]"
         :page-size="5"
-        :pager-count="3"
         layout="total, sizes, prev, pager, next, jumper"
         :total="0"
         style="text-align:right"
@@ -121,7 +120,8 @@ export default {
           value: "选项2",
           label: "正常"
         }
-      ]
+      ],
+      form: {}
     };
   }
 };

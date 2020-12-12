@@ -1,28 +1,6 @@
 <template>
   <div>
     <el-card>
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="公告内容">
-          <el-input placeholder="公告内容" size="small"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select placeholder="状态" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="是否置顶">
-          <el-select placeholder="是否置顶" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" size="small"
-            >搜索</el-button
-          >
-          <el-button icon="el-icon-delete" size="small">清空</el-button>
-        </el-form-item>
-      </el-form>
-
       <el-row :span="24">
         <el-col :span="20">
           <el-button type="primary" icon="el-icon-plus" size="small"
@@ -40,7 +18,6 @@
         ref="singleTable"
         :data="tableData"
         highlight-current-row
-        @current-change="handleCurrentChange"
         style="width: 100%; margin-top: 10px"
         border
         :header-cell-style="{
@@ -86,10 +63,12 @@
 export default {
   name: "announcement",
   data() {
-    return {};
+    return {
+      tableData: []
+    };
   },
   mounted() {
-    getclassify();
+    // getclassify();
   }
   // methods: {
   //   async getclassify() {

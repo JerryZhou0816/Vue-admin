@@ -1,8 +1,8 @@
-import { reqTrademark,reqAllGood } from "../api/mock-api";
+import { reqTrademark, reqAllGood } from "../api/mock-api";
 
 const state = {
-  trademarkInfo: {},
-  allgoodsList:{}           //存商品列表
+  trademarkInfo: {}, // 品牌数据信息
+  allgoodsList: {} //存商品列表
 };
 
 const mutations = {
@@ -11,8 +11,8 @@ const mutations = {
     state.trademarkInfo = trademark;
   },
   //商品列表
-  RECIVEALLGOODS(state,allgoodsList){
-    state.allgoodsList = allgoodsList
+  RECIVEALLGOODS(state, allgoodsList) {
+    state.allgoodsList = allgoodsList;
   }
 };
 
@@ -24,9 +24,9 @@ const actions = {
     commit("RECIVETRADEMARK", result.data.data);
   },
   //获取商品列表
-  async getAllgoodsList({commit}){
-    const result = await reqAllGood()
-    commit('RECIVEALLGOODS',result.data.data)
+  async getAllgoodsList({ commit }) {
+    const result = await reqAllGood();
+    commit("RECIVEALLGOODS", result.data.data);
   }
 };
 
