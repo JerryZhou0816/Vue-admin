@@ -508,7 +508,7 @@ export default {
       parentId: 33,
       sort: 3,
       name: "会员管理",
-      href: "/shop",
+      href: "/member",
       icon: "fa fa-download",
       children: [
         {
@@ -516,7 +516,7 @@ export default {
           parentId: 33,
           sort: 0,
           name: "会员管理",
-          href: "/shop/announcement",
+          href: "/member/members",
           icon: "fa fa-image",
           children: [],
           isShow: "1"

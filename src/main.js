@@ -51,6 +51,9 @@ Object.keys(filters).forEach(key => {
 
 // 创建实例
 new Vue({
+  beforeCreate() {
+    Vue.prototype.$bus = this
+  },
   store,
   router,
   el: "#root",

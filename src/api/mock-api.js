@@ -1,11 +1,27 @@
 import MockAjax from "../ajax/mockAjax";
 
-const reqUser = () => {
+export const reqUser = () => {
   return MockAjax({
     url: "/userinfo",
     method: "get"
   });
 };
 
-//品牌管理请求
 
+
+//获取品牌数据
+export const reqTrademark = () => {
+  return MockAjax({
+    url: "/trademark",
+    method: "get"
+  });
+};
+
+
+//获取商品列表
+export const reqAllGood = () => {
+  return MockAjax({
+    url: "/allgoods",
+    method: "get"
+  });
+};
