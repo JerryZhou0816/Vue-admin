@@ -1,8 +1,9 @@
-import { reqTrademark,reqAllGood } from "../api/mock-api";
+import { reqTrademark,reqAllGood, reqGoodsCategory } from "../api/mock-api";
 
 const state = {
   trademarkInfo: {},
-  allgoodsList:{}           //存商品列表
+  allgoodsList:{},    //存商品列表
+  goodsCategory:{}    //存商品分类
 };
 
 const mutations = {
@@ -13,6 +14,10 @@ const mutations = {
   //商品列表
   RECIVEALLGOODS(state,allgoodsList){
     state.allgoodsList = allgoodsList
+  },
+  //商品分类
+  RECIVEGOODSCATEGORY(state,goodsCategory){
+    state.goodsCategory = goodsCategory
   }
 };
 
@@ -27,7 +32,14 @@ const actions = {
   async getAllgoodsList({commit}){
     const result = await reqAllGood()
     commit('RECIVEALLGOODS',result.data.data)
-  }
+  },
+  //获取商品分类G
+  async getGoodsCategory({commit}){
+    const result = await reqGoodsCategory()
+    commit('RECIVEGOODSCATEGORY',result.data.data)
+  },
+ 
+
 };
 
 const getters = {};

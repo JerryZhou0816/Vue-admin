@@ -1,39 +1,41 @@
 <template>
   <div>
+    <!-- 新增 -->
     <el-button 
       type="primary"  
       icon="el-icon-plus" 
       size="small"
       @click="showAddDialog"
-      >
-    新增
+      >新增
     </el-button>
 
-      <el-table style="width: 100%; margin: 20px 0;" border  >
+      <el-table style="width: 100%; margin: 20px 0;" border  :data="goodsCategory.list">
         <el-table-column
           align="center"
-          prop="prop"
+          prop="keywords"
           label="分类名称">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="prop"
-          label="图片">
+          prop="showStatus"
+          label="级别">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="prop"
-          label="状态">
+          prop="productCount"
+          label="商品数量">
         </el-table-column>
         <el-table-column
           align="center"
-          prop="prop"
-          label="排序号">
+          prop="sort"
+          label="排序">
         </el-table-column>
         <el-table-column
           align="center"
           prop="prop"
           label="操作">
+          <el-button type="success" icon="el-icon-edit" size="mini">修改</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
         </el-table-column>
       </el-table>
 
@@ -45,17 +47,7 @@
       :visible.sync="isShowDialog">
       
       <el-form ref="form"  label-width="80px">
-        <el-form-item label="分类图片" label-width="100px">
-             <el-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              list-type="picture-card">
-              <i class="el-icon-plus"></i>
-          </el-upload>
-           <el-dialog :visible.sync="dialogVisible">
-          <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog> 
-        </el-form-item>
-
+        
         
         <el-form-item label="分类名称">
           <el-input placeholder=""></el-input>
@@ -71,7 +63,7 @@
        
       
         <el-form-item label="排序号">
-           <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+          <el-input type="number" placeholder="" style="width:220px"></el-input>
         </el-form-item>
 
 
@@ -84,8 +76,8 @@
 
 
           <el-form-item align="right">
-           <el-button type="primary" size="small">确定</el-button>
-           <el-button size="small">取消</el-button>
+           <el-button type="primary" size="small" @click="isShowDialog = false">确定</el-button>
+           <el-button size="small"  @click="isShowDialog = false">取消</el-button>
         </el-form-item>
 
       </el-form>
@@ -102,21 +94,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  name: 'classification3',
+  name: 'classification',
   data(){
     return{
       isShowDialog: false,
-      num: 1
+      num: 1,
+    
+      radio:''
     }
+  },
+  mounted(){
+    this.getGoodsCategory()
   },
   methods:{
     showAddDialog(){
       this.isShowDialog = true;
     },
-    handleChange(value) {
-        console.log(value);
+    getGoodsCategory(){
+      this.$store.dispatch('getGoodsCategory')
     }
+  },
+  computed:{
+    ...mapState({
+      goodsCategory:state => state.product.goodsCategory
+    })
   }
 }
 </script>

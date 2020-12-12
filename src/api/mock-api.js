@@ -25,3 +25,11 @@ export const reqAllGood = () => {
     method: "get"
   });
 };
+
+ //获取商品分类
+ export const reqGoodsCategory = () => {
+  return MockAjax({
+    url: "/goodscategory",
+    method: "get"
+  });
+};

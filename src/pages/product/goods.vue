@@ -103,9 +103,25 @@
       <!-- 分页 -->
       <Pagination></Pagination>
       </template>
-      <!-- -->
-      
+
+
+      <!--增加页 -->
       <goodsForm v-else></goodsForm>
+
+        <!-- dialog对话框，用于修改组件 -->
+    <el-dialog title="修改" :visible.sync="isLoading">
+      <el-form ref="form" label-width="80px">
+       
+         <el-form-item align="right">
+           <el-button type="primary" size="small" @click="isLoading = false">确定</el-button>
+           <el-button size="small" @click="isLoading = false">取消</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-dialog>
+
+
+
 
 
 
@@ -128,7 +144,7 @@ export default {
     },
     //显示与隐藏增加页
     isShow:true,
-
+    isLoading:false
    }
  },
  mounted(){
@@ -144,10 +160,10 @@ export default {
    getAllgoodsList(){
      this.$store.dispatch('getAllgoodsList')
    },
-  //  //点击修改
-  //  changeGoods(){
-
-  //  }
+   //点击修改
+   changeGoods(){
+     this.isLoading = true
+   }
  },
  computed:{
    ...mapState({
