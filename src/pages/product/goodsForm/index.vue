@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-form ref="form"  label-width="100px">
-     
+     <!-- 图片 -->
        <el-form-item label="产品图片">
           <el-upload
               action="https://jsonplaceholder.typicode.com/posts/"
@@ -12,42 +12,46 @@
           <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog> 
        </el-form-item>
+       <!-- 状态 -->
         <el-form-item label="状态">
           <el-radio-group >
             <el-radio v-model="radio" label="1">上架</el-radio>
             <el-radio v-model="radio" label="2">下架</el-radio>
           </el-radio-group>
         </el-form-item>
+        <!-- 产品分类 -->
          <el-form-item label="产品分类">
            <el-select placeholder="请选择" style="width:190px;">
              <el-optio>
              </el-optio>
            </el-select>
         </el-form-item>
+        <!-- 产品分组 -->
          <el-form-item label="产品分组">
            <el-select placeholder="请选择" style="width:220px;">
              <el-optio>
              </el-optio>
            </el-select>
         </el-form-item>
+        <!-- 产品名称 -->
          <el-form-item label="产品名称">
            <el-input placeholder="产品名称" style="width:360px;"></el-input>
         </el-form-item>
-	
-      <el-form-item label="产品卖点">
-           
-         <el-input placeholder="产品卖点" type="textarea" rows="2" style="width:360px;"></el-input>
-       </el-form-item>
+	      <!-- 产品卖点 -->
+        <el-form-item label="产品卖点"> 
+          <el-input placeholder="产品卖点" type="textarea" rows="2" style="width:360px;"></el-input>
+        </el-form-item>
+        <!-- 配送方式 -->
         <el-form-item label="配送方式">
          <el-checkbox-group  v-model="checkList">
           <el-checkbox label="商家配送" @click="FreightConfiguration"></el-checkbox>
           <el-checkbox label="用户自提"></el-checkbox>
-        </el-checkbox-group>
+         </el-checkbox-group>
        </el-form-item>
-          
+          <!-- 运费配置 -->
         <el-form-item label="运费配置">
            <el-input placeholder="规格名" style="width:190px;"></el-input>
-       </el-form-item>
+        </el-form-item>
 
  
         <el-form-item label="商品规格">
@@ -67,7 +71,7 @@
          <el-button  size="mini">取消</el-button>
       </el-form-item>
 
-      
+      <!-- 表格 -->
 			<el-form-item>
          <el-table
             :data="goodsList"
@@ -112,8 +116,9 @@
          </el-table>
       </el-form-item>
       
+      <!-- 产品详情 -->
       <el-form-item label="产品详情">
-      <el-input type="textarea" v-model="model"></el-input>
+        <el-input type="textarea" v-model="model"></el-input>
       </el-form-item>
 
       <el-form-item>
