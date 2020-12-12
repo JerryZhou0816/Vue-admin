@@ -1,0 +1,106 @@
+{
+    "records": [
+        {
+            "propId": 121,
+            "propName": "颜色",
+            "rule": 1,
+            "shopId": null,
+            "prodPropValues": [
+                {
+                    "valueId": 758,
+                    "propValue": "红色",
+                    "propId": null
+                },
+                {
+                    "valueId": 759,
+                    "propValue": "蓝色",
+                    "propId": null
+                },
+                {
+                    "valueId": 760,
+                    "propValue": "250g",
+                    "propId": null
+                },
+                {
+                    "valueId": 761,
+                    "propValue": "54",
+                    "propId": null
+                },
+                {
+                    "valueId": 762,
+                    "propValue": "987",
+                    "propId": null
+                },
+                {
+                    "valueId": 763,
+                    "propValue": "56TRGC",
+                    "propId": null
+                }
+            ]
+        },
+        {
+            "propId": 122,
+            "propName": "当前规格",
+            "rule": 1,
+            "shopId": null,
+            "prodPropValues": [
+                {
+                    "valueId": 774,
+                    "propValue": "规格1",
+                    "propId": null
+                },
+                {
+                    "valueId": 775,
+                    "propValue": "规格2",
+                    "propId": null
+                },
+                {
+                    "valueId": 776,
+                    "propValue": "规格3",
+                    "propId": null
+                },
+                {
+                    "valueId": 777,
+                    "propValue": "规格4",
+                    "propId": null
+                },
+                {
+                    "valueId": 778,
+                    "propValue": "规格5",
+                    "propId": null
+                }
+            ]
+        },
+        {
+            "propId": 130,
+            "propName": "  弄了",
+            "rule": 1,
+            "shopId": null,
+            "prodPropValues": [
+                {
+                    "valueId": 779,
+                    "propValue": "你看看",
+                    "propId": null
+                }
+            ]
+        },
+        {
+            "propId": 131,
+            "propName": "mmml",
+            "rule": 1,
+            "shopId": null,
+            "prodPropValues": [
+                {
+                    "valueId": 780,
+                    "propValue": "近几年",
+                    "propId": null
+                }
+            ]
+        }
+    ],
+    "total": 4,
+    "size": 10,
+    "current": 1,
+    "searchCount": true,
+    "pages": 1
+}

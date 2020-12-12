@@ -21,7 +21,9 @@ import Pagination from "@/components/Pagination";
 //提示
 import HintButton from "@/components/HintButton";
 import Title from "@/components/Title";
-
+// mock
+import "./mock/mockServer";
+import "./api/mock-api";
 Vue.prototype.$http = axios;
 Vue.axios = axios;
 Vue.http = axios;
