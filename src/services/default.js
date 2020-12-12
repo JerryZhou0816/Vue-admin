@@ -385,7 +385,7 @@ export default {
       id: 2,
       parentId: null,
       sort: 1,
-      name: "产品管理",
+      name: "商品管理",
       href: "/product",
       icon: "fa fa-upload",
       children: [
@@ -393,7 +393,7 @@ export default {
           id: 92,
           parentId: 2,
           sort: 0,
-          name: "分组管理",
+          name: "品牌管理",
           href: "/product/gruop",
           icon: "fa fa-bank",
           isShow: "1"
@@ -402,7 +402,7 @@ export default {
           id: 93,
           parentId: 2,
           sort: 0,
-          name: "产品管理",
+          name: "商品列表",
           href: "/product/goods",
           icon: "fa fa-area-chart",
           children: [],
@@ -412,7 +412,7 @@ export default {
           id: 94,
           parentId: 2,
           sort: 0,
-          name: "分类管理",
+          name: "商品分类",
           href: "/product/classification",
           icon: "fa fa-area-chart",
           children: [],
@@ -432,7 +432,7 @@ export default {
           id: 96,
           parentId: 2,
           sort: 0,
-          name: "规格管理",
+          name: "商品规格",
           href: "/product/specification",
           icon: "fa fa-area-chart",
           children: [],
@@ -508,7 +508,7 @@ export default {
       parentId: 33,
       sort: 3,
       name: "会员管理",
-      href: "/shop",
+      href: "/member",
       icon: "fa fa-download",
       children: [
         {
@@ -516,7 +516,7 @@ export default {
           parentId: 33,
           sort: 0,
           name: "会员管理",
-          href: "/shop/announcement",
+          href: "/member/members",
           icon: "fa fa-image",
           children: [],
           isShow: "1"
