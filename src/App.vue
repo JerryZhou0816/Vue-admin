@@ -20,6 +20,8 @@
       </div>
   </div>
 </template>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script> Vue.config.productionTip=false </script>
 
 <script>
   import Vue from 'vue'

@@ -6,7 +6,6 @@
         :data="shopInfo"
         tooltip-effect="dark"
         style="width: 100%;"
-        border
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column label="自提点名称" width="120" prop="addrName">
@@ -33,44 +32,8 @@
 
 <script>
 export default {
-  name: "self",
-  data() {
-    return {
-      shopInfo: [
-        {
-          addr: "aadasda",
-          addrId: 6,
-          addrName: "aadasda",
-          area: "立山区",
-          areaId: 210304000000,
-          city: "鞍山市",
-          cityId: 210300000000,
-          mobile: "12345123132",
-          province: "辽宁省",
-          provinceId: 210000000000,
-          shopId: 1
-        },
-        {
-          addr: "鼓楼区鼓楼广场",
-          addrId: 7,
-          addrName: "河南开封",
-          area: "市辖区",
-          areaId: 410201000000,
-          city: "开封市",
-          cityId: 410200000000,
-          mobile: "19000000000",
-          province: "河南省",
-          provinceId: 410000000000,
-          shopId: 1
-        }
-      ]
-    };
-  }
+  name: "self"
 };
 </script>
 
-<style>
-.el-table thead {
-  color: #000;
-}</style
->>
+<style></style>
