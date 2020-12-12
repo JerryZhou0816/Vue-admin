@@ -6,7 +6,7 @@
         :data="shopInfo"
         tooltip-effect="dark"
         style="width: 100%;"
-        border
+       
       >
         <el-table-column type="selection" width="55"></el-table-column>
         <el-table-column label="自提点名称" width="120" prop="addrName">
