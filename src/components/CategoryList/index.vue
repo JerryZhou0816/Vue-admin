@@ -6,7 +6,7 @@
         <el-input v-model="formInline.user" :placeholder="headLine.primaryTitle"></el-input>
       </el-form-item>
       <el-form-item :label="headLine.secondaryTitle">
-        <el-select v-model="formInline.region" :placeholder="headLine.secondaryTitle">
+        <el-select v-model="formInline.region" :placeholder="headLine.secondaryTitle" >
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
@@ -22,7 +22,7 @@
 <script>
   export default {
     name:'',
-    props:['headLine'],
+    props:['headLine','dropDownMuen'],
     data(){
       return{
         formInline: {

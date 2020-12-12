@@ -8,7 +8,7 @@
           <section class="content">
             <el-breadcrumb separator="/" style="margin-bottom: 20px;">
               <template v-for="child in currentMenus">
-                <el-breadcrumb-item :to="{ path: child.href }">{{child.name}}</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{path: child.href }">{{child.name}}</el-breadcrumb-item>
               </template>
             </el-breadcrumb>
             <transition mode="out-in" enter-active-class="fadeIn" leave-active-class="fadeOut" appear>

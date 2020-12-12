@@ -45,31 +45,49 @@
       :visible.sync="isShowDialog">
       
       <el-form ref="form"  label-width="80px">
-        <el-form-item label="标签名称" label-width="100px">
-           <el-input  autocomplete="off"></el-input>
+        <el-form-item label="分类图片" label-width="100px">
+             <el-upload
+              action="https://jsonplaceholder.typicode.com/posts/"
+              list-type="picture-card">
+              <i class="el-icon-plus"></i>
+          </el-upload>
+           <el-dialog :visible.sync="dialogVisible">
+          <img width="100%" :src="dialogImageUrl" alt="">
+        </el-dialog> 
         </el-form-item>
 
-        <div class="category">
-        <el-form-item label="类别">
-          <el-radio-group >
-            <el-radio v-model="radio" label="1">正常</el-radio>
-            <el-radio v-model="radio" label="2">禁用</el-radio>
-          </el-radio-group>
+        
+        <el-form-item label="分类名称">
+          <el-input placeholder=""></el-input>
         </el-form-item>
        
 
-        <el-form-item label="列表样式">
+        <el-form-item label="上级分类">
+         <el-select placeholder="请选择" style="width:220px;">
+             <el-optio>
+             </el-optio>
+           </el-select>
+        </el-form-item>
+       
+      
+        <el-form-item label="排序号">
+           <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+        </el-form-item>
+
+
+       <el-form-item label="状态">
           <el-radio-group >
-            <el-radio v-model="radio" label="1">一列一个</el-radio>
-            <el-radio v-model="radio" label="1">一列两个</el-radio>
-            <el-radio v-model="radio" label="2">一列三个</el-radio>
+            <el-radio v-model="radio" label="1">下线</el-radio>
+            <el-radio v-model="radio" label="2">正常</el-radio>
           </el-radio-group>
         </el-form-item>
-     </div>
-      
-        <el-form-item label="排序" label-width="100px">
-           <el-input  autocomplete="off"></el-input>
-        </el-form-item>  
+
+
+          <el-form-item align="right">
+           <el-button type="primary" size="small">确定</el-button>
+           <el-button size="small">取消</el-button>
+        </el-form-item>
+
       </el-form>
     </el-dialog>
     
@@ -89,13 +107,16 @@ export default {
   data(){
     return{
       isShowDialog: false,
+      num: 1
     }
   },
   methods:{
     showAddDialog(){
       this.isShowDialog = true;
     },
-   
+    handleChange(value) {
+        console.log(value);
+    }
   }
 }
 </script>

@@ -26,7 +26,7 @@
         circle
         size="small"
         title="显 隐"
-        
+         @click="ShowAndHide"
        ></HintButton>
        <HintButton 
         icon="el-icon-search" 
@@ -88,10 +88,26 @@
         <el-form-item label="排序" label-width="100px">
            <el-input  autocomplete="off"></el-input>
         </el-form-item>  
+
+         <el-form-item align="right">
+           <el-button type="primary" size="small">确定</el-button>
+           <el-button size="small">取消</el-button>
+        </el-form-item>
+
       </el-form>
     </el-dialog>
     
+   
+    <!-- dialog对话框，用于显示与隐藏组件 -->
+    <el-dialog
+      title="多选"
+      :visible.sync="isShowAndHide">
+       <el-transfer ></el-transfer>
 
+
+
+    </el-dialog>
+    
     
 
   </div>
@@ -108,14 +124,17 @@ export default {
         secondaryTitle:'状态'
       },
       isShowDialog: false,
-    
+      isShowAndHide:false,
+     
     }
   },
   methods:{
     showAddDialog(){
       this.isShowDialog = true;
     },
-   
+   ShowAndHide(){
+      this.isShowAndHide = true;
+    },
   }
 }
 </script>

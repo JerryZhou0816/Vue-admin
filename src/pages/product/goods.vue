@@ -48,7 +48,7 @@
      <Title></Title>
 
       <!-- 表格 -->
-      <el-table  style="width: 100%; margin: 10px 0 30px 0" border>
+      <el-table  style="width: 100%; margin: 20px 0" border>
         <el-table-column
           prop="prop"
           label="label"
@@ -58,7 +58,7 @@
         <el-table-column
           align="center"
           prop="prop"
-          label="产品名字" >
+          label="产品名称" >
         </el-table-column>
         <el-table-column
           align="center"
@@ -113,7 +113,8 @@ export default {
    return{
      headLine:{
       primaryTitle:"产品名字",
-      secondaryTitle:'状态'
+      secondaryTitle:'状态',
+     
     },
     isShow:true
    }
