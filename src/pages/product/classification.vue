@@ -5,7 +5,8 @@
       type="primary"  
       icon="el-icon-plus" 
       size="small"
-      @click="showAddDialog"
+      @click="showAddDialog" 
+    
       >新增
     </el-button>
 
@@ -46,37 +47,22 @@
       title="新增"
       :visible.sync="isShowDialog">
       
-      <el-form ref="form"  label-width="80px">
-        
+      <el-form ref="form" :model="goodsForm" label-width="80px">
         
         <el-form-item label="分类名称">
-          <el-input placeholder=""></el-input>
+          <el-input placeholder="分类名称" v-model="goodsForm.spName"></el-input>
         </el-form-item>
-       
-
-        <el-form-item label="上级分类">
-         <el-select placeholder="请选择" style="width:220px;">
-             <el-optio>
-             </el-optio>
-           </el-select>
+        <el-form-item label="级别">
+          <el-input placeholder="" style="width:220px" v-model="goodsForm.level"></el-input>
+        </el-form-item>  
+        <el-form-item label="商品数量">
+          <el-input  placeholder="" style="width:220px" v-model="goodsForm.spNum"></el-input>
         </el-form-item>
-       
-      
         <el-form-item label="排序号">
-          <el-input type="number" placeholder="" style="width:220px"></el-input>
+          <el-input  placeholder="" style="width:220px" v-model="goodsForm.spSerial"></el-input>
         </el-form-item>
-
-
-       <el-form-item label="状态">
-          <el-radio-group >
-            <el-radio v-model="radio" label="1">下线</el-radio>
-            <el-radio v-model="radio" label="2">正常</el-radio>
-          </el-radio-group>
-        </el-form-item>
-
-
-          <el-form-item align="right">
-           <el-button type="primary" size="small" @click="isShowDialog = false">确定</el-button>
+        <el-form-item align="right">
+           <el-button type="primary" size="small" @click="addOrUpdateClassification">确定</el-button>
            <el-button size="small"  @click="isShowDialog = false">取消</el-button>
         </el-form-item>
 
@@ -99,24 +85,49 @@ export default {
   name: 'classification',
   data(){
     return{
-      isShowDialog: false,
-      num: 1,
+      isShowDialog: false, //dialog切换
+      //收集数据的对象
+      goodsForm:{
+        spName:'',
+        level:'',
+        spNum:'',
+        spSerial:''
+      },
     
       radio:''
     }
   },
   mounted(){
+    //调用
     this.getGoodsCategory()
   },
   methods:{
+    //点击新增按钮显示dialog
     showAddDialog(){
-      this.isShowDialog = true;
+      this.isShowDialog = true
+      //每次打开dialog清空数据 ，解决bug 
+       this.goodsForm = {
+          spName:'',
+          level:'',
+          spNum:'',
+          spSerial:''
+      }
+      
     },
+    //获取商品分类
     getGoodsCategory(){
       this.$store.dispatch('getGoodsCategory')
+    },
+    //点击确定按钮添加数据
+    addOrUpdateClassification(){
+      this.goodsCategory.list.push({
+        
+      })
+      this.isShowDialog = true
     }
   },
   computed:{
+    //拿数据
     ...mapState({
       goodsCategory:state => state.product.goodsCategory
     })
