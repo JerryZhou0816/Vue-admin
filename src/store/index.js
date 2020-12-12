@@ -4,12 +4,12 @@ import types from "./mutation-types";
 import defaultValue from "../services/default";
 import * as api from "../api";
 import { getCurrentMenu, getSessionKey } from "../common/utils";
-
+import product from "@/store/product";
+import shop from "@/store/shop";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   strict: true, // process.env.NODE_ENV !== 'production', 直接修改state 抛出异常
-
   getters: {
     loading: state => state.loading,
     menuList: state => state.menuList,
@@ -76,6 +76,10 @@ const store = new Vuex.Store({
       const a = getCurrentMenu(fullPath, state.menuList);
       commit(types.LOAD_CURRENT_MENU, a.reverse());
     }
+  },
+  modules: {
+    product,
+    shop
   }
 });
 
