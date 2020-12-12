@@ -27,10 +27,10 @@
         >项</span
       >
       <el-button type="text">清 空</el-button>
+      <!-- :data="addressList" -->
 
       <el-table
         ref="multipleTable"
-        :data="addressList"
         tooltip-effect="dark"
         style="width: 100%; text-align:center"
         border
