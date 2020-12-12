@@ -33,7 +33,7 @@ const actions = {
     const result = await reqAllGood()
     commit('RECIVEALLGOODS',result.data.data)
   },
-  //获取商品分类G
+  //获取商品分类
   async getGoodsCategory({commit}){
     const result = await reqGoodsCategory()
     commit('RECIVEGOODSCATEGORY',result.data.data)

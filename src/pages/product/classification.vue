@@ -85,7 +85,9 @@ export default {
   name: 'classification',
   data(){
     return{
+      // goodsCategory,
       isShowDialog: false, //dialog切换
+      
       //收集数据的对象
       goodsForm:{
         spName:'',
@@ -94,7 +96,8 @@ export default {
         spSerial:''
       },
     
-      radio:''
+      radio:'',
+      
     }
   },
   mounted(){
@@ -117,13 +120,40 @@ export default {
     //获取商品分类
     getGoodsCategory(){
       this.$store.dispatch('getGoodsCategory')
+      // 若 localStorage 没有数据，则将 Mock 的数据存入
+      if (!localStorage.getItem('goodsCategory')) {
+        localStorage.setItem('goodsCategory',JSON.stringify("goodsCategory"))
+      }
+      // 每次获取数据时，再从 localStorage 中拉取数据
+      var goodsCategory = JSON.parse(localStorage.getItem('goodsCategory'))
+      return goodsCategory
     },
     //点击确定按钮添加数据
-    addOrUpdateClassification(){
-      this.goodsCategory.list.push({
-        
-      })
-      this.isShowDialog = true
+    addOrUpdateClassification(options){
+
+      // const {spName,level,spNum,spSerial} = this
+      this.options = this.goodsForm
+     console.log(JSON.parse(localStorage.getItem('goodsCategory')))
+
+     // 先从 localStorage 中拉取数据
+       if (!localStorage.getItem('goodsCategory')) {
+         var goodsCategory = JSON.parse(localStorage.getItem('goodsCategory'))
+      }
+     
+      // 获取传入用户信息对象，是一个字符串，需要转化为对象
+      var user = JSON.parse(options)
+      // 使用 mock 随机生成一个 id
+      user.id = Random.id()
+      // 将 user 插入到 userlist 中
+      goodsCategory.list.unshift(user)
+      // 重新将 userlist 存入 localStorage 中
+      localStorage.setItem('goodsCategory', JSON.stringify('goodsCategory'))
+      return {
+        data: '用户添加成功'
+      }
+
+     
+      this.isShowDialog = false
     }
   },
   computed:{
