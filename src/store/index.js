@@ -28,7 +28,7 @@ const store = new Vuex.Store({
     device: {
       isMobile: false
     },
-    userInfo: { name: "admin" },
+    userInfo: { name: "上帝" },
     currentMenus: []
   },
   mutations: {

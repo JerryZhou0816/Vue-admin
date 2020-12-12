@@ -22,7 +22,7 @@
           <el-button icon="el-icon-delete" size="small">清空</el-button>
         </el-form-item>
       </el-form>
-    
+
       <el-row :span="24">
         <el-col :span="20">
           <el-button type="primary" icon="el-icon-plus" size="small"
@@ -45,7 +45,7 @@
         border
         :header-cell-style="{
           background: '#fafafa',
-          color: 'rgba(0, 0, 0, 0.85)',
+          color: 'rgba(0, 0, 0, 0.85)'
         }"
       >
         <el-table-column type="index" width="50" label="序号" align="center">
@@ -57,7 +57,7 @@
         <el-table-column property="address" label="是否置顶" align="center">
         </el-table-column>
         <el-table-column property="address" label="操作" align="center">
-            <template>
+          <template>
             <el-button type="primary" icon="el-icon-edit" size="small"
               >编辑</el-button
             >
@@ -85,8 +85,20 @@
 <script>
 export default {
   name: "announcement",
+  data() {
+    return {};
+  },
+  mounted() {
+    getclassify();
+  }
+  // methods: {
+  //   async getclassify() {
+  //     try {
+  //       const result = await
+  //     } catch (error) {}
+  //   },
+  // },
 };
 </script>
 
-<style >
-</style>
+<style></style>
