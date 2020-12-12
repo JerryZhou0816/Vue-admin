@@ -82,31 +82,27 @@
           align="center"
           prop="prop"
           label="销售价" >
+          
         </el-table-column>
         <el-table-column
           align="center"
           prop="prop"
-          label="商品原价" >
+          label="市场价" >
         </el-table-column>
         <el-table-column
           align="center"
           prop="prop"
-          label="商品现价" >
+          label="库存" >
         </el-table-column>
         <el-table-column
           align="center"
           prop="prop"
-          label="商品库存" >
+          label="商品重量(kg)" >
         </el-table-column>
         <el-table-column
           align="center"
           prop="prop"
-          label="产品图片" >
-        </el-table-column>
-        <el-table-column
-          align="center"
-          prop="prop"
-          label="状态" >
+          label="商品体积(m3)" >
         </el-table-column>
         <el-table-column
           align="center"
