@@ -1,28 +1,6 @@
 <template>
   <div>
     <el-card>
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="公告内容">
-          <el-input placeholder="公告内容" size="small"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select placeholder="状态" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="是否置顶">
-          <el-select placeholder="是否置顶" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" size="small"
-            >搜索</el-button
-          >
-          <el-button icon="el-icon-delete" size="small">清空</el-button>
-        </el-form-item>
-      </el-form>
-
       <el-row :span="24">
         <el-col :span="20">
           <el-button
@@ -53,14 +31,14 @@
       <!-- @current-change="handleCurrentChange"
        :data="tableData" -->
       <el-table
-        :data="shopList"
+        :data="carouselList"
         ref="singleTable"
         highlight-current-row
         style="width: 100%; margin-top: 10px"
         border
         :header-cell-style="{
           background: '#fafafa',
-          color: 'rgba(0, 0, 0, 0.85)',
+          color: 'rgba(0, 0, 0, 0.85)'
         }"
       >
         <el-table-column
@@ -71,12 +49,17 @@
           prop="name"
         >
         </el-table-column>
-        <el-table-column property="date" label="轮播图片" align="center">
-          <template>
-            <img src="" alt="" width="100px" height="100px" />
+        <el-table-column
+          property="date"
+          label="轮播图片"
+          align="center"
+          width="200"
+        >
+          <template slot-scope="{ row, $index }">
+            <img :src="row.image_url" alt="" width="100px" height="100px" />
           </template>
         </el-table-column>
-        <el-table-column property="name" label="顺序" align="center">
+        <el-table-column property="name" prop="id" label="顺序" align="center">
         </el-table-column>
         <el-table-column
           property="address"
@@ -84,6 +67,9 @@
           align="center"
           width="161px"
         >
+          <template>
+            <el-tag size="mini">正常</el-tag>
+          </template>
         </el-table-column>
         <el-table-column
           property="address"
@@ -103,15 +89,7 @@
       </el-table>
       <!-- @size-change="handleSizeChange"
       @current-change="handleCurrentChange" -->
-      <el-pagination
-        :current-page="2"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
-        layout=" ->,total,sizes,prev, pager, next, jumper  "
-        :total="400"
-        background
-      >
-      </el-pagination>
+      <Pagination :total="count"></Pagination>
     </el-card>
     <el-dialog title="提示" width="50%" :visible.sync="dialogVisible">
       <!-- :before-close="handleClose" -->
@@ -156,27 +134,23 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "carousel",
   data() {
     return {
       dialogVisible: false,
       imageUrl: "",
-      shopList: [
-        {
-          name: 1,
-          age: 2,
-        },
-      ],
+      count: 4
     };
   },
   methods: {
     handleClose(done) {
       this.$confirm("确认关闭？")
-        .then((_) => {
+        .then(_ => {
           done();
         })
-        .catch((_) => {});
+        .catch(_ => {});
     },
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
@@ -193,7 +167,19 @@ export default {
       }
       return isJPG && isLt2M;
     },
+    // 获取轮播图数据信息
+    getCarousel() {
+      this.$store.dispatch("getCarousel");
+    }
   },
+  mounted() {
+    this.getCarousel();
+  },
+  computed: {
+    ...mapState({
+      carouselList: state => state.shop.address.data
+    })
+  }
 };
 </script>
 

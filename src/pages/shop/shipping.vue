@@ -1,34 +1,11 @@
 <template>
   <div>
     <el-card>
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="公告内容">
-          <el-input placeholder="公告内容" size="small"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select placeholder="状态" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="是否置顶">
-          <el-select placeholder="是否置顶" size="small">
-            <el-option label="区域一" value="shanghai"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" icon="el-icon-search" size="small"
-            >搜索</el-button
-          >
-          <el-button icon="el-icon-delete" size="small">清空</el-button>
-        </el-form-item>
-      </el-form>
-
       <el-row :span="24">
         <el-col :span="20">
           <el-button
-            type="primary"
             icon="el-icon-plus"
-            size="small"
+            size="mini"
             @click="dialogVisible = true"
             >添加</el-button
           >
@@ -53,12 +30,12 @@
       <el-table
         ref="singleTable"
         highlight-current-row
-        :data="shopList"
+        :data="courierList"
         style="width: 100%; margin-top: 10px"
         border
         :header-cell-style="{
           background: '#fafafa',
-          color: 'rgba(0, 0, 0, 0.85)',
+          color: 'rgba(0, 0, 0, 0.85)'
         }"
       >
         <el-table-column
@@ -66,27 +43,26 @@
           width="54"
           label="序号"
           align="center"
+          selection-change=""
         >
         </el-table-column>
-        <el-table-column prop="name" label="模板名称" align="center">
+        <el-table-column prop="name" label="快递名称" align="center">
         </el-table-column>
         <el-table-column type="input" label="操作" align="center">
-          <template>
-            <el-button type="primary" icon="el-icon-edit" size="small"
-              >编辑</el-button
-            >
-            <el-button type="danger" icon="el-icon-delete" size="small"
+          <template slot-scope="{ row, $index }">
+            <el-button icon="el-icon-edit" size="mini">编辑</el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini"
               >删除</el-button
             >
           </template>
         </el-table-column>
       </el-table>
       <el-pagination
-        :current-page="2"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
+        :current-page="1"
+        :page-sizes="[5, 10, 30]"
+        :page-size="7"
         layout=" ->,total,sizes,prev, pager, next, jumper  "
-        :total="400"
+        :total="6"
         background
       >
       </el-pagination>
@@ -116,7 +92,7 @@
           :data="shopList"
           :header-cell-style="{
             background: '#fafafa',
-            color: 'rgba(0, 0, 0, 0.85)',
+            color: 'rgba(0, 0, 0, 0.85)'
           }"
         >
           <el-table-column prop="name" label="可配送区域" width="450px">
@@ -148,7 +124,7 @@
           >
         </el-form-item>
         <el-form-item>
-          <el-checkbox-group v-model="shopList.type">
+          <el-checkbox-group>
             <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
           </el-checkbox-group>
         </el-form-item>
@@ -163,29 +139,35 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "shipping",
   data() {
     return {
-      dialogVisible: false,
-      shopList: [
-        {
-          name: 1,
-          age: 2,
-          type: [],
-        },
-      ],
+      dialogVisible: false
     };
   },
   methods: {
     handleClose(done) {
       this.$confirm("确认关闭？")
-        .then((_) => {
+        .then(_ => {
           done();
         })
-        .catch((_) => {});
+        .catch(_ => {});
     },
+    // 调用actions的数据请求
+    getFreight() {
+      this.$store.dispatch("getFreight");
+    }
   },
+  mounted() {
+    this.getFreight();
+  },
+  computed: {
+    ...mapState({
+      courierList: state => state.shop.courierData.data
+    })
+  }
 };
 </script>
 

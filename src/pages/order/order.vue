@@ -13,12 +13,9 @@
       </div>
       <!-- 筛选条件 -->
       <div class="selectContent">
-        <el-form
-          ref="form"
-          :model="orderForm"
-          :inline='true'
-        >
+        <el-form ref="form" :model="orderForm" :inline="true">
           <!-- label-width="100px" -->
+
           <el-form-item label="输入搜索:" label-width="100px">
             <el-input
               v-model="orderID"
@@ -132,7 +129,7 @@
           :current-page="5"
           :page-sizes="[5, 7, 10]"
           :page-size="3"
-          pager-count="3"
+          :pager-count="5"
           layout="total, sizes, prev, pager, next, jumper"
           :total="20"
         >
@@ -235,13 +232,11 @@ export default {
   padding: 20px;
   margin-top: 15px;
   text-align: center;
-  
 }
 .selectContainer .selectContent .el-form {
   /* display: flex; */
   /* flex-wrap: nowrap; */
 }
-
 
 .listTitle {
   border: 1px solid #ebeef5;

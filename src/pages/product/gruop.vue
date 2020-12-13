@@ -101,7 +101,7 @@
     </el-dialog>
 
     <!-- dialog对话框，用于显示与隐藏组件 -->
-    <el-dialog title="多选" :visible.sync="isShowAndHide">
+    <el-dialog title="多选" :visible.sync="isShowDialog">
       <el-transfer></el-transfer>
       <el-input autocomplete="off"></el-input>
     </el-dialog>
@@ -128,7 +128,7 @@ export default {
       this.isShowDialog = true;
     },
     ShowAndHide() {
-      this.isShowAndHide = true;
+      this.isShowDialog = true;
     },
     getTrademark() {
       this.$store.dispatch("getTradermark");
