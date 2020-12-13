@@ -25,16 +25,18 @@
 
       <el-table-column align="center" prop="prop" label="操作">
       <template slot-scope="{row,$index}">
-      
-          <el-button type="success" icon="el-icon-edit" size="mini">修改</el-button>
-          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(keywords)">删除</el-button>
-      
+       
+          <el-button type="success" icon="el-icon-edit" size="mini" @click="showUpdateDialog(row)" >修改</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(row)">删除</el-button>
+       
       </template>
       </el-table-column>
     </el-table>
 
     <!-- dialog对话框，用于增加组件 -->
-    <el-dialog title="新增" :visible.sync="isShowDialog">
+    <el-dialog 
+     :title="goodsForm.id ? '修改' : '新增'"
+     :visible.sync="isShowDialog">
       <el-form ref="form" :model="goodsForm" label-width="80px">
         
         <el-form-item label="分类名称">
@@ -73,6 +75,7 @@ export default {
       
       //收集数据的对象
       goodsForm:{
+        // id:'',
         keywords:'',
         showStatus:'',
         productCount:'',
@@ -119,8 +122,13 @@ export default {
       this.isShowDialog = false
     },
     //点击删除按钮
-    deleterupdateclassification(row){
-       this.$store.dispatch('deleterupdateclassification',row)
+    deleterupdateclassification(id){
+       this.$store.dispatch('deleterupdateclassification',id)
+    },
+    //点击修改按钮
+    showUpdateDialog(row){
+      this.isShowDialog = true
+       this.goodsForm = {...row}
     }
   },
   computed:{

@@ -24,14 +24,23 @@ const mutations = {
     state.goodsCategory.list.push(item)
  },
  //删除商品分类数据
- DELETERUPDATECLASSIFICATION(state,row) {
+ DELETERUPDATECLASSIFICATION(state,id) {
   state.goodsCategory.list.map((v,i)=> {
-    if(v.keywords == row){
-       state.goodsCategory.list.splice(i,1)
+    if(v.id == id){
+      state.goodsCategory.list.splice(i,1)
     }
-   })
+ })
+ },
+ //修改商品
+ SHOWUPDATEDIALOG(state,item){
+  state.goodsCategory.list.reduce((previous, current) => {
+    
+  }, 0);
+ }
+
+
 }
-}
+
 
 
 
@@ -61,8 +70,8 @@ const actions = {
     commit('ADDORUPDATECLASSIFICATION',item)
  },
  //删除
- deleterupdateclassification({commit},row) {
-  commit('DELETERUPDATECLASSIFICATION',row)
+ deleterupdateclassification({commit},id) {
+  commit('DELETERUPDATECLASSIFICATION',id)
 },
 };
 
