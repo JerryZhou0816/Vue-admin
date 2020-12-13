@@ -128,7 +128,10 @@ export default {
     //点击修改按钮
     showUpdateDialog(row){
       this.isShowDialog = true
-       this.goodsForm = {...row}
+      
+      this.goodsForm = {...row}
+      this.$store.dispatch('',)
+
     }
   },
   computed:{

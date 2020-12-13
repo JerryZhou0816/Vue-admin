@@ -33,9 +33,7 @@ const mutations = {
  },
  //修改商品
  SHOWUPDATEDIALOG(state,item){
-  state.goodsCategory.list.reduce((previous, current) => {
-    
-  }, 0);
+  state.goodsCategory.list
  }
 
 
