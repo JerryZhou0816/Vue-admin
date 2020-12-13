@@ -24,12 +24,11 @@
       </el-table-column>
 
       <el-table-column align="center" prop="prop" label="操作">
-      <template slot-scope="{row,$index}">
-       
+        <template slot-scope="{row,$index}">
           <el-button type="success" icon="el-icon-edit" size="mini" @click="showUpdateDialog(row)" >修改</el-button>
-          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(row)">删除</el-button>
        
-      </template>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(row)">删除</el-button>
+           </template>
       </el-table-column>
     </el-table>
 
@@ -44,15 +43,15 @@
         </el-form-item>
 
         <el-form-item label="级别">
-          <el-input placeholder="" style="width:220px" v-model="goodsForm.showStatus"></el-input>
+          <el-input  style="width:220px" v-model="goodsForm.showStatus"></el-input>
         </el-form-item> 
 
         <el-form-item label="商品数量">
-          <el-input  placeholder="" style="width:220px" v-model="goodsForm.productCount"></el-input>
+          <el-input  style="width:220px" v-model="goodsForm.productCount"></el-input>
         </el-form-item>
 
         <el-form-item label="排序号">
-          <el-input  placeholder="" style="width:220px" v-model="goodsForm.sort"></el-input>
+          <el-input   style="width:220px" v-model="goodsForm.sort"></el-input>
         </el-form-item>
         
         <el-form-item align="right">
@@ -83,9 +82,6 @@ export default {
       },
     
       radio:'',
-      // goodsList:{
-      //   goodsCategory
-      // }
     }
   },
   mounted(){
@@ -122,15 +118,14 @@ export default {
       this.isShowDialog = false
     },
     //点击删除按钮
-    deleterupdateclassification(id){
-       this.$store.dispatch('deleterupdateclassification',id)
+    deleterupdateclassification(row){
+       this.$store.dispatch('deleterupdateclassification',row)
     },
     //点击修改按钮
     showUpdateDialog(row){
       this.isShowDialog = true
-      
       this.goodsForm = {...row}
-      this.$store.dispatch('',)
+      this.$store.dispatch('addOrUpdateClassification',row)
 
     }
   },
