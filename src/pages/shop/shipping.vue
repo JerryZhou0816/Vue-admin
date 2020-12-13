@@ -89,7 +89,6 @@
         <el-table
           style="width: 100%"
           border
-          :data="shopList"
           :header-cell-style="{
             background: '#fafafa',
             color: 'rgba(0, 0, 0, 0.85)'
