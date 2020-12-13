@@ -18,8 +18,26 @@ const mutations = {
   //商品分类
   RECIVEGOODSCATEGORY(state,goodsCategory){
     state.goodsCategory = goodsCategory
-  }
-};
+  },
+  //新增商品分类数据
+  ADDORUPDATECLASSIFICATION(state,item) {
+    state.goodsCategory.list.push(item)
+ },
+ //删除商品分类数据
+ DELETERUPDATECLASSIFICATION(state,row) {
+  state.goodsCategory.list.map((v,i)=> {
+    if(v.keywords == row){
+       state.goodsCategory.list.splice(i,1)
+    }
+   })
+}
+}
+
+
+
+
+
+
 
 const actions = {
   // 获取品牌数据
@@ -38,8 +56,14 @@ const actions = {
     const result = await reqGoodsCategory()
     commit('RECIVEGOODSCATEGORY',result.data.data)
   },
- 
-
+  //新增
+  addOrUpdateClassification({commit},item) {
+    commit('ADDORUPDATECLASSIFICATION',item)
+ },
+ //删除
+ deleterupdateclassification({commit},row) {
+  commit('DELETERUPDATECLASSIFICATION',row)
+},
 };
 
 const getters = {};

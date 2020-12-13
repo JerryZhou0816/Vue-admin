@@ -24,8 +24,12 @@
       </el-table-column>
 
       <el-table-column align="center" prop="prop" label="操作">
-        <el-button type="success" icon="el-icon-edit" size="mini">修改</el-button>
-        <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
+      <template slot-scope="{row,$index}">
+      
+          <el-button type="success" icon="el-icon-edit" size="mini">修改</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(keywords)">删除</el-button>
+      
+      </template>
       </el-table-column>
     </el-table>
 
@@ -34,19 +38,19 @@
       <el-form ref="form" :model="goodsForm" label-width="80px">
         
         <el-form-item label="分类名称">
-          <el-input placeholder="分类名称" v-model="goodsForm.spName"></el-input>
+          <el-input placeholder="分类名称" v-model="goodsForm.keywords"></el-input>
         </el-form-item>
 
         <el-form-item label="级别">
-          <el-input placeholder="" style="width:220px" v-model="goodsForm.level"></el-input>
+          <el-input placeholder="" style="width:220px" v-model="goodsForm.showStatus"></el-input>
         </el-form-item> 
 
         <el-form-item label="商品数量">
-          <el-input  placeholder="" style="width:220px" v-model="goodsForm.spNum"></el-input>
+          <el-input  placeholder="" style="width:220px" v-model="goodsForm.productCount"></el-input>
         </el-form-item>
 
         <el-form-item label="排序号">
-          <el-input  placeholder="" style="width:220px" v-model="goodsForm.spSerial"></el-input>
+          <el-input  placeholder="" style="width:220px" v-model="goodsForm.sort"></el-input>
         </el-form-item>
         
         <el-form-item align="right">
@@ -69,10 +73,10 @@ export default {
       
       //收集数据的对象
       goodsForm:{
-        spName:'',
-        level:'',
-        spNum:'',
-        spSerial:''
+        keywords:'',
+        showStatus:'',
+        productCount:'',
+        sort:''
       },
     
       radio:'',
@@ -91,10 +95,10 @@ export default {
       this.isShowDialog = true
       //每次打开dialog清空数据 ，解决bug 
        this.goodsForm = {
-          spName:'',
-          level:'',
-          spNum:'',
-          spSerial:''
+        keywords:'',
+        showStatus:'',
+        productCount:'',
+        sort:''
       }
       
     },
@@ -103,13 +107,20 @@ export default {
       this.$store.dispatch('getGoodsCategory') 
     },
     //点击确定按钮添加数据
-    addOrUpdateClassification(){
-      
-      
-
-
-
+    addOrUpdateClassification(){   
+      let newObj = {
+        id:this.goodsCategory.list.length,
+        keywords:this.goodsForm.keywords,
+        showStatus:this.goodsForm.showStatus,
+        productCount:this.goodsForm.productCount,
+        sort:this.goodsForm.sort,
+      } 
+      this.$store.dispatch('addOrUpdateClassification',newObj)
       this.isShowDialog = false
+    },
+    //点击删除按钮
+    deleterupdateclassification(row){
+       this.$store.dispatch('deleterupdateclassification',row)
     }
   },
   computed:{
