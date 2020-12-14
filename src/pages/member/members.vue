@@ -52,14 +52,15 @@
     <!-- :data="data" -->
     <!-- 表格详情 -->
     <div class="tableContainer">
-      <el-table border>
+      <el-table border :data="userInfo.data">
         <el-table-column type="selection" label="label" width="55">
         </el-table-column>
         <el-table-column
           header-align="center"
           align="center"
-          prop="prop"
+          prop="nickname"
           label="用户昵称"
+          width="150"
         >
         </el-table-column>
         <el-table-column
@@ -68,19 +69,25 @@
           prop="prop"
           label="用户头像"
         >
+          <template slot-scope="{ row, $index }">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="row.avatar"
+            ></el-image>
+          </template>
         </el-table-column>
         <el-table-column
           header-align="center"
           align="center"
-          prop="prop"
-          label="状态"
+          prop="register_time"
+          label="注册时间"
         >
         </el-table-column>
         <el-table-column
           header-align="center"
           align="center"
-          prop="prop"
-          label="操作"
+          prop="last_login_time"
+          label="最近登录"
         >
         </el-table-column>
       </el-table>
@@ -105,8 +112,9 @@
 </template>
 
 <script>
+import { reqMemberInfo } from "../../api/mock-api";
 export default {
-  name: "announcement",
+  name: "user",
   data() {
     return {
       // 状态的收集
@@ -121,8 +129,18 @@ export default {
           label: "正常"
         }
       ],
-      form: {}
+      form: {},
+      userInfo: {}
     };
+  },
+  methods: {
+    async getUserInfo() {
+      const result = await reqMemberInfo();
+      this.userInfo = result.data.data.userData;
+    }
+  },
+  mounted() {
+    this.getUserInfo();
   }
 };
 </script>

@@ -78,35 +78,82 @@
     </div>
     <!-- :data="data" -->
     <!-- 数据列表详情 -->
-    <el-table border style="width: 100%;margin:20px 0;">
-      <el-table-column type="selection" width="50"> </el-table-column
-      ><el-table-column type="index" label="编号" width="width">
+    <el-table
+      border
+      style="width: 100%;margin:20px 0;text-align:center"
+      :data="orderInfo.list"
+    >
+      <el-table-column type="selection" width="50" align="center">
       </el-table-column
-      ><el-table-column prop="prop" label="订单编号" width="width">
+      ><el-table-column
+        type="index"
+        label="编号"
+        width="80"
+        prop="id"
+        align="center"
+      >
       </el-table-column
-      ><el-table-column prop="prop" label="提交时间" width="width">
+      ><el-table-column
+        prop="orderSn"
+        label="订单编号"
+        width="width"
+        align="center"
+      >
       </el-table-column
-      ><el-table-column prop="prop" label="用户账号" width="width">
+      ><el-table-column
+        prop="createTime"
+        label="提交时间"
+        width="width"
+        align="center"
+      >
       </el-table-column
-      ><el-table-column prop="prop" label="订单金额" width="width">
+      ><el-table-column
+        prop="memberUsername"
+        label="用户账号"
+        width="width"
+        align="center"
+      >
       </el-table-column
-      ><el-table-column prop="prop" label="支付方式" width="width">
+      ><el-table-column
+        prop="payAmount"
+        label="订单金额"
+        width="width"
+        align="center"
+      >
       </el-table-column
-      ><el-table-column prop="prop" label="订单来源" width="width">
-      </el-table-column
-      ><el-table-column prop="prop" label="订单状态" width="width">
-      </el-table-column
-      ><el-table-column prop="prop" label="操作" width="width">
-        <template slot-scope>
-          <el-button type="primary">查看订单</el-button>
-          <el-button type="danger">删除订单</el-button>
+      ><el-table-column
+        prop="payType"
+        label="支付方式"
+        width="width"
+        align="center"
+      >
+        <template slot-scope="{ row, $index }">
+          <span v-if="row.payType === 1">
+            支付宝
+          </span>
+          <span v-else>
+            微信
+          </span>
+        </template> </el-table-column
+      ><el-table-column prop="" label="订单来源" width="width" align="center">
+        <template>
+          <span>App订单</span>
+        </template> </el-table-column
+      ><el-table-column prop="" label="订单状态" width="width" align="center">
+        <template slot-scope="{ row, $index }">
+          <span>已支付</span>
+        </template> </el-table-column
+      ><el-table-column prop="prop" label="操作" width="200" align="center">
+        <template>
+          <el-button size="mini">查看订单</el-button>
+          <el-button type="danger" size="mini">删除订单</el-button>
         </template>
       </el-table-column>
     </el-table>
     <!-- 底部框架 -->
-    <div class="footer">
+    <!-- <div class="footer"> -->
       <!-- 批量操作选择 -->
-      <el-select v-model="handleValue" placeholder="批量操作">
+      <!-- <el-select v-model="handleValue" placeholder="批量操作">
         <el-option
           v-for="hanleItem in hanleOptions"
           :key="hanleItem.value"
@@ -114,11 +161,11 @@
           :value="hanleItem.value"
         >
         </el-option>
-      </el-select>
+      </el-select> -->
       <!-- 确定按钮 -->
-      <div style="display:inline-block;margin-left:20px">
+      <!-- <div style="display:inline-block;margin-left:20px">
         <el-button type="primary" size="medium">确定</el-button>
-      </div>
+      </div> -->
 
       <!-- 分页器 -->
       <!-- @size-change="handleSizeChange"
@@ -126,12 +173,12 @@
       <div style=" float:right">
         <el-pagination
           background
-          :current-page="5"
+          :current-page="1"
           :page-sizes="[5, 7, 10]"
-          :page-size="3"
+          :page-size="1"
           :pager-count="5"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="20"
+          :total="15"
         >
         </el-pagination>
       </div>
@@ -140,6 +187,7 @@
 </template>
 
 <script>
+import { reqOrderInfo } from "../../api/mock-api";
 export default {
   name: "order",
   data() {
@@ -153,7 +201,8 @@ export default {
       statusValue: "", //订单状态
       sortValue: "", //订单分类
       sourceValue: "", //订单来源
-
+      orderInfo: {},
+      orderFrom: "App订单",
       // 订单状态：
       statusOptions: [
         {
@@ -217,6 +266,15 @@ export default {
       ],
       handleValue: ""
     };
+  },
+  methods: {
+    async getOrderInfo() {
+      const result = await reqOrderInfo();
+      this.orderInfo = result.data.data;
+    }
+  },
+  mounted() {
+    this.getOrderInfo();
   }
 };
 </script>
@@ -234,8 +292,9 @@ export default {
   text-align: center;
 }
 .selectContainer .selectContent .el-form {
-  /* display: flex; */
-  /* flex-wrap: nowrap; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .listTitle {

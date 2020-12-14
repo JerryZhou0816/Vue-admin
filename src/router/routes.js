@@ -28,6 +28,10 @@ import members from "@/pages/member/members.vue";
 const routes = [
   { path: "/login", component: login },
   {
+    path: "/",
+    redirect: "/index"
+  },
+  {
     path: "/test",
     component: app,
     children: [{ path: "*", component: NotFoundView }]

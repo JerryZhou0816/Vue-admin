@@ -45,3 +45,35 @@ export const reqFreight = () => {
     method: "get"
   });
 };
+
+// 获取自提点数据
+export const reqSelfData = () => {
+  return MockAjax({
+    url: "/address",
+    method: "get"
+  });
+};
+
+// 获取订单管理
+export const reqOrderInfo = () => {
+  return MockAjax({
+    url: "/order",
+    method: "get"
+  });
+};
+
+// 获取会员名单
+export const reqMemberInfo = () => {
+  return MockAjax({
+    url: "/userinfo",
+    method: "get"
+  });
+};
+
+// 获取热门搜索数据
+export const reqHotsearch = () => {
+  return MockAjax({
+    url: "/hotsearch",
+    method: "get"
+  });
+};
