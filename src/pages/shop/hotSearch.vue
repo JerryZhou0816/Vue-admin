@@ -22,6 +22,7 @@
       </el-row>
       <span class="select">当前表格已选择<span class="number">0</span>项</span>
       <el-button type="text">清 空</el-button>
+      <!-- @current-change="handleCurrentChange" -->
       <el-table
         ref="singleTable"
         :data="hotSearchList"

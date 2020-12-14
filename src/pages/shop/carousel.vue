@@ -139,6 +139,8 @@ export default {
   name: "carousel",
   data() {
     return {
+      one: "",
+      two: "",
       dialogVisible: false,
       imageUrl: "",
       count: 4

@@ -23,8 +23,8 @@ export const reqAllGood = () => {
   });
 };
 
- //获取商品分类
- export const reqGoodsCategory = () => {
+//获取商品分类
+export const reqGoodsCategory = () => {
   return MockAjax({
     url: "/goodscategory",
     method: "get"
@@ -73,7 +73,13 @@ export const reqMemberInfo = () => {
 // 获取热门搜索数据
 export const reqHotsearch = () => {
   return MockAjax({
-    url: "/hotsearch",
+    url: "/hotsearch"
+  });
+};
+//获取公告数据
+export const reqTemplate = () => {
+  return MockAjax({
+    url: "/notice",
     method: "get"
   });
 };
