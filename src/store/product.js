@@ -3,7 +3,8 @@ import { reqTrademark,reqAllGood, reqGoodsCategory } from "../api/mock-api";
 const state = {
   trademarkInfo: {},
   allgoodsList:{},    //存商品列表
-  goodsCategory:{}    //存商品分类
+  goodsCategory:{} ,   //存商品分类
+  // goodsInfo:{}
 };
 
 const mutations = {
@@ -20,29 +21,26 @@ const mutations = {
     state.goodsCategory = goodsCategory
   },
   //新增商品分类数据
-  ADDORUPDATECLASSIFICATION(state,item) {
-    if(item.row){
-      state.goodsCategory.list.splice(item)
-    }else{
-      state.goodsCategory.list.push(item)
-    }
+  ADDORUPDATECLASSIFICATION(state,newInfo) {
+      state.goodsCategory.list.unshift(newInfo)
+    },
    
- },
+ 
  //删除商品分类数据
- DELETERUPDATECLASSIFICATION(state,id) {
-  state.goodsCategory.list.map((v,i)=> {
-    if(v.id == id){
-      state.goodsCategory.list.splice(i,1)
-    }
- })
+ DELETERUPDATECLASSIFICATION(state,index) {
+  state.goodsCategory.list.splice(index, 1);
  },
  //修改商品
- SHOWUPDATEDIALOG(state,item){
-  state.goodsCategory.list
+ SHOWUPDATEDIALOG(state,update){
+  state.goodsCategory.list.splice(
+    update.index,
+    update.index,
+    update.newObj
+  );
  }
-
-
 }
+
+
 
 const actions = {
   // 获取品牌数据
@@ -61,14 +59,7 @@ const actions = {
     const result = await reqGoodsCategory()
     commit('RECIVEGOODSCATEGORY',result.data.data)
   },
-  //新增
-  addOrUpdateClassification({commit},item) {
-    commit('ADDORUPDATECLASSIFICATION',item)
- },
- //删除
- deleterupdateclassification({commit},id) {
-  commit('DELETERUPDATECLASSIFICATION',id)
-},
+ 
 };
 
 const getters = {};

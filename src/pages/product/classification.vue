@@ -5,7 +5,7 @@
       type="primary"  
       icon="el-icon-plus" 
       size="small"
-      @click="showAddDialog" 
+      @click="isShowDialog = true" 
       >新增
     </el-button>
 
@@ -25,7 +25,7 @@
 
       <el-table-column align="center" prop="prop" label="操作">
         <template slot-scope="{row,$index}">
-          <el-button type="success" icon="el-icon-edit" size="mini" @click="showUpdateDialog(row)" >修改</el-button>
+          <el-button type="success" icon="el-icon-edit" size="mini" @click="showUpdateDialog(row,$index)" >修改</el-button>
        
           <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification">删除</el-button>
            </template>
@@ -80,7 +80,7 @@ export default {
         productCount:'',
         sort:''
       },
-    
+      index: "" ,//用来存放点击对应数据的表示
       radio:'',
       //验证规则
      rules: {
@@ -120,43 +120,38 @@ export default {
     this.getGoodsCategory()
   },
   methods:{
-    //点击新增按钮显示dialog
-    showAddDialog(){
-      this.isShowDialog = true
-      //每次打开dialog清空数据 ，解决bug 
-       this.goodsForm = {
-        keywords:'',
-        showStatus:'',
-        productCount:'',
-        sort:''
-      }
-      
-    },
-    //获取商品分类
+     //获取商品分类
     getGoodsCategory(){
       this.$store.dispatch('getGoodsCategory') 
     },
-    //点击确定按钮添加数据
-    addOrUpdateClassification(){   
-      let newObj = {
-        id:this.goodsCategory.list.length,
-        keywords:this.goodsForm.keywords,
-        showStatus:this.goodsForm.showStatus,
-        productCount:this.goodsForm.productCount,
-        sort:this.goodsForm.sort,
-      } 
-      this.$store.dispatch('addOrUpdateClassification',newObj)
+    //收集数据添加到store中
+    addOrUpdateClassification(){
       this.isShowDialog = false
+      let {keywords,showStatus,productCount,sort} = this.goodsForm
+      let newGoodsInfo = {
+        keywords,
+        showStatus,
+        productCount,
+        sort
+      } 
+      this.$store.commit('ADDORUPDATECLASSIFICATION',newGoodsInfo)
+      this.$message.success("添加商品成功！");
+      this.goodsForm = {};
+     
+      
     },
-    //点击删除按钮
-    deleterupdateclassification(){
-       this.$store.dispatch('deleterupdateclassification',row)
-    },
+   
     //点击修改按钮
-    showUpdateDialog(row){
+    showUpdateDialog(row,index){
       this.isShowDialog = true
-      this.goodsForm = {...row}
-    }
+      this.goodsForm = {...row};
+      this.index = index;
+    },
+     //点击删除按钮
+    deleterupdateclassification(index){
+       this.$store.commit('DELETERUPDATECLASSIFICATION',index)
+    },
+    
   },
   computed:{
     //拿数据
