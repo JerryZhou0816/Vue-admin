@@ -35,7 +35,7 @@ const mutations = {
   state.goodsCategory.list.splice(
     update.index,
     update.index,
-    update.newObj
+    update.newGoodsInfo
   );
  }
 }
