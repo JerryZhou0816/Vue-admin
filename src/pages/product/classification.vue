@@ -1,72 +1,62 @@
 <template>
   <div>
-    <el-button
-      type="primary"
-      icon="el-icon-plus"
+    <!-- 新增 -->
+    <el-button 
+      type="primary"  
+      icon="el-icon-plus" 
       size="small"
-      @click="showAddDialog"
-    >
-      新增
+      @click="showAddDialog" 
+      >新增
     </el-button>
 
-    <el-table style="width: 100%; margin: 20px 0;" border>
-      <el-table-column align="center" prop="prop" label="分类名称">
+    <!-- 表格 -->
+    <el-table style="width: 100%; margin: 20px 0;" border  :data="goodsCategory.list">
+      <el-table-column align="center"  prop="keywords" label="分类名称">
       </el-table-column>
-      <el-table-column align="center" prop="prop" label="图片">
+      
+      <el-table-column align="center" prop="showStatus" label="级别">
       </el-table-column>
-      <el-table-column align="center" prop="prop" label="状态">
+
+      <el-table-column align="center"  prop="productCount" label="商品数量">
       </el-table-column>
-      <el-table-column align="center" prop="prop" label="排序号">
+
+      <el-table-column  align="center" prop="sort"  label="排序">
       </el-table-column>
+
       <el-table-column align="center" prop="prop" label="操作">
+        <template slot-scope="{row,$index}">
+          <el-button type="success" icon="el-icon-edit" size="mini" @click="showUpdateDialog(row)" >修改</el-button>
+       
+          <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleterupdateclassification(row)">删除</el-button>
+           </template>
       </el-table-column>
     </el-table>
 
     <!-- dialog对话框，用于增加组件 -->
-    <el-dialog title="新增" :visible.sync="isShowDialog">
-      <el-form ref="form" label-width="80px">
-        <el-form-item label="分类图片" label-width="100px">
-          <el-upload
-            action="https://jsonplaceholder.typicode.com/posts/"
-            list-type="picture-card"
-          >
-            <i class="el-icon-plus"></i>
-          </el-upload>
-          <el-dialog :visible.sync="isShowDialog">
-            <img width="100%" src="dialogImageUrl" alt="" />
-          </el-dialog>
-        </el-form-item>
-
+    <el-dialog 
+     :title="goodsForm.id ? '修改' : '新增'"
+     :visible.sync="isShowDialog">
+      <el-form ref="form" :model="goodsForm" label-width="80px">
+        
         <el-form-item label="分类名称">
-          <el-input placeholder=""></el-input>
+          <el-input placeholder="分类名称" v-model="goodsForm.keywords"></el-input>
         </el-form-item>
 
-        <el-form-item label="上级分类">
-          <el-select placeholder="请选择" style="width:220px;">
-            <el-optio> </el-optio>
-          </el-select>
+        <el-form-item label="级别">
+          <el-input  style="width:220px" v-model="goodsForm.showStatus"></el-input>
+        </el-form-item> 
+
+        <el-form-item label="商品数量">
+          <el-input  style="width:220px" v-model="goodsForm.productCount"></el-input>
         </el-form-item>
 
         <el-form-item label="排序号">
-          <el-input-number
-            v-model="num"
-            controls-position="right"
-            @change="handleChange"
-            :min="1"
-            :max="10"
-          ></el-input-number>
+          <el-input   style="width:220px" v-model="goodsForm.sort"></el-input>
         </el-form-item>
-
-        <el-form-item label="状态">
-          <el-radio-group>
-            <el-radio v-model="radio" label="1">下线</el-radio>
-            <el-radio v-model="radio" label="2">正常</el-radio>
-          </el-radio-group>
-        </el-form-item>
-
+        
         <el-form-item align="right">
-          <el-button type="primary" size="small">确定</el-button>
-          <el-button size="small">取消</el-button>
+          <el-button type="primary" size="small" @click="addOrUpdateClassification">确定</el-button>
+          <el-button size="small"  @click="isShowDialog = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -74,22 +64,76 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-  name: "classification3",
-  data() {
-    return {
-      isShowDialog: false,
-      num: 1,
-      radio: false
-    };
-  },
-  methods: {
-    showAddDialog() {
-      this.isShowDialog = true;
-    },
-    handleChange(value) {
-      console.log(value);
+  name: 'classification',
+  data(){
+    return{
+      // goodsCategory,
+      isShowDialog: false, //dialog切换
+      
+      //收集数据的对象
+      goodsForm:{
+        // id:'',
+        keywords:'',
+        showStatus:'',
+        productCount:'',
+        sort:''
+      },
+    
+      radio:'',
     }
+  },
+  mounted(){
+    //调用
+    this.getGoodsCategory()
+  },
+  methods:{
+    //点击新增按钮显示dialog
+    showAddDialog(){
+      this.isShowDialog = true
+      //每次打开dialog清空数据 ，解决bug 
+       this.goodsForm = {
+        keywords:'',
+        showStatus:'',
+        productCount:'',
+        sort:''
+      }
+      
+    },
+    //获取商品分类
+    getGoodsCategory(){
+      this.$store.dispatch('getGoodsCategory') 
+    },
+    //点击确定按钮添加数据
+    addOrUpdateClassification(){   
+      let newObj = {
+        id:this.goodsCategory.list.length,
+        keywords:this.goodsForm.keywords,
+        showStatus:this.goodsForm.showStatus,
+        productCount:this.goodsForm.productCount,
+        sort:this.goodsForm.sort,
+      } 
+      this.$store.dispatch('addOrUpdateClassification',newObj)
+      this.isShowDialog = false
+    },
+    //点击删除按钮
+    deleterupdateclassification(row){
+       this.$store.dispatch('deleterupdateclassification',row)
+    },
+    //点击修改按钮
+    showUpdateDialog(row){
+      this.isShowDialog = true
+      this.goodsForm = {...row}
+      this.$store.dispatch('addOrUpdateClassification',row)
+
+    }
+  },
+  computed:{
+    //拿数据
+    ...mapState({
+      goodsCategory:state => state.product.goodsCategory
+    })
   }
 };
 </script>

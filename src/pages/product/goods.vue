@@ -44,11 +44,9 @@
       <el-table
         style="width: 100%; margin: 20px 0"
         border
-        :data="allgoodsList.list"
-      >
+        :data="allgoodsList.list">
         <el-table-column prop="prop" label="label" type="selection">
         </el-table-column>
-
         <el-table-column align="center" prop="brandName" label="产品名称">
         </el-table-column>
         <el-table-column align="center" prop="originalPrice" label="商品原价">
@@ -57,8 +55,7 @@
           align="center"
           prop="price"
           label="商品现价"
-          width="70px"
-        >
+          width="70px">
         </el-table-column>
         <el-table-column
           align="center"
@@ -76,25 +73,32 @@
           align="center"
           prop="newStatus"
           label="状态"
-          width="50px"
-        >
+          width="50px">
         </el-table-column>
         <el-table-column align="center" prop="prop" label="操作">
-          <el-button type="primary" icon="el-icon-edit" size="mini"
-            >修改</el-button
-          >
-          <el-button type="danger" icon="el-icon-delete" size="mini"
-            >删除</el-button
-          >
+          <el-button type="primary" icon="el-icon-edit" size="mini">修改</el-button>
+          <el-button type="danger" icon="el-icon-delete" size="mini">删除</el-button>
         </el-table-column>
       </el-table>
 
       <!-- 分页 -->
       <Pagination></Pagination>
-    </template>
-    <!-- -->
+      </template>
 
-    <goodsForm v-else></goodsForm>
+
+      <!--增加页 -->
+      <goodsForm v-else></goodsForm>
+
+      <!-- dialog对话框，用于修改组件 -->
+      <el-dialog title="修改" :visible.sync="isLoading">
+        <el-form ref="form" label-width="80px">      
+          <el-form-item align="right">
+            <el-button type="primary" size="small" @click="isLoading = false">确定</el-button>
+            <el-button size="small" @click="isLoading = false">取消</el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
+
   </div>
 </template>
 
@@ -118,27 +122,32 @@ export default {
     //调用
     this.getAllgoodsList();
   },
-  methods: {
-    //点击修改新增显示添加页
-    toGoodsForm() {
-      this.isShow = false;
-    },
-    //获取商品列表
-    getAllgoodsList() {
-      this.$store.dispatch("getAllgoodsList");
-    }
-    //  //点击修改
-    //  changeGoods(){
 
-    //  }
-  },
-  computed: {
-    ...mapState({
-      allgoodsList: state => state.product.allgoodsList
-    })
-  },
-  components: {
-    goodsForm
-  }
-};
+ 
+ methods:{
+   //点击修改新增显示添加页
+   toGoodsForm(){
+     this.isShow = false
+   },
+   //获取商品列表
+   getAllgoodsList(){
+     this.$store.dispatch('getAllgoodsList')
+   },
+   //点击修改
+   changeGoods(){
+     this.isLoading = true
+   },
+   
+ },
+ computed:{
+   ...mapState({
+     allgoodsList:state => state.product.allgoodsList
+   })
+ },
+ components:{
+   goodsForm
+ }
+  
+}
+   
 </script>
