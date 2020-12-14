@@ -44,13 +44,6 @@ const mutations = {
 
 }
 
-
-
-
-
-
-
-
 const actions = {
   // 获取品牌数据
   async getTradermark({ commit }) {
