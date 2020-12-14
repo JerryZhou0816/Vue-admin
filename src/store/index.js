@@ -6,6 +6,7 @@ import * as api from "../api";
 import { getCurrentMenu, getSessionKey } from "../common/utils";
 import product from "@/store/product";
 import shop from "@/store/shop";
+import notice from "./notice";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -79,7 +80,8 @@ const store = new Vuex.Store({
   },
   modules: {
     product,
-    shop
+    shop,
+    notice
   }
 });
 

@@ -96,9 +96,9 @@ export default {
       radio: 3,
       headLine: {
         primaryTitle: "标签名称",
-        secondaryTitle: "状态"
+        secondaryTitle: "状态",
       },
-      isShowDialog: false
+      isShowDialog: false,
     };
   },
   methods: {
@@ -107,11 +107,11 @@ export default {
     },
     getTrademark() {
       this.$store.dispatch("getTradermark");
-    }
+    },
   },
   mounted() {
     this.getTrademark();
-  }
+  },
 };
 </script>
 

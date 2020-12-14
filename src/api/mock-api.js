@@ -14,3 +14,10 @@ export const reqTrademark = () => {
     method: "get"
   });
 };
+//获取公告数据
+export const reqTemplate = () => {
+  return MockAjax({
+    url: "/notice",
+    method: "get"
+  });
+};

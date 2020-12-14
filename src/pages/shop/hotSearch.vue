@@ -6,12 +6,12 @@
           <el-input placeholder="公告内容" size="small"></el-input>
         </el-form-item>
         <el-form-item label="状态">
-          <el-select placeholder="状态" size="small">
+          <el-select placeholder="状态" size="small" v-model="one">
             <el-option label="区域一" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="是否置顶">
-          <el-select placeholder="是否置顶" size="small">
+          <el-select placeholder="是否置顶" size="small" v-model="two">
             <el-option label="区域一" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
@@ -40,11 +40,11 @@
       </el-row>
       <span class="select">当前表格已选择<span class="number">0</span>项</span>
       <el-button type="text">清 空</el-button>
+      <!-- @current-change="handleCurrentChange" -->
       <el-table
         ref="singleTable"
         :data="shopList"
         highlight-current-row
-        @current-change="handleCurrentChange"
         style="width: 100%; margin-top: 10px"
         border
         :header-cell-style="{
@@ -113,6 +113,8 @@ export default {
   name: "hotsearch",
   data() {
     return {
+      one: "",
+      two: "",
       shopList: [
         {
           name: 1,

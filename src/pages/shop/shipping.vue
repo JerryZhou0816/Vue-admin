@@ -6,12 +6,12 @@
           <el-input placeholder="公告内容" size="small"></el-input>
         </el-form-item>
         <el-form-item label="状态">
-          <el-select placeholder="状态" size="small">
+          <el-select placeholder="状态" size="small" v-model="one">
             <el-option label="区域一" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="是否置顶">
-          <el-select placeholder="是否置顶" size="small">
+          <el-select placeholder="是否置顶" size="small" v-model="two">
             <el-option label="区域一" value="shanghai"></el-option>
           </el-select>
         </el-form-item>
@@ -167,6 +167,8 @@ export default {
   name: "shipping",
   data() {
     return {
+      one: "",
+      two: "",
       dialogVisible: false,
       shopList: [
         {
