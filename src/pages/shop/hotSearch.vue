@@ -7,7 +7,7 @@
             type="primary"
             icon="el-icon-plus"
             size="small"
-            @click="dialogFormVisible = true"
+            @click="addNewhot"
             >添加</el-button
           >
           <el-button type="danger" icon="el-icon-plus" size="small" disabled
@@ -99,16 +99,21 @@
     </el-card>
 
     <!-- 点击添加的dialog对话框 -->
-    <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
-      <el-form :model="hotInfo">
-        <el-form-item label="标题" :label-width="formLabelWidth">
+    <el-dialog
+      title="收货地址"
+      :visible.sync="dialogFormVisible"
+      ref="hotInfo"
+      class="demo-ruleForm"
+    >
+      <el-form :model="hotInfo" ref="hotInfo" :rules="rules">
+        <el-form-item label="标题" :label-width="formLabelWidth" prop="title">
           <el-input
             v-model="hotInfo.title"
             :value="hotInfo.title"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="内容" :label-width="formLabelWidth">
+        <el-form-item label="内容" :label-width="formLabelWidth" prop="content">
           <el-input
             v-model="hotInfo.content"
             :value="hotInfo.content"
@@ -132,7 +137,9 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="addHotsearch">确 定</el-button>
+        <el-button type="primary" @click="addHotsearch('hotInfo')"
+          >确 定</el-button
+        >
       </div>
     </el-dialog>
 
@@ -185,13 +192,26 @@ export default {
   data() {
     return {
       hotInfo: {
+        title: "",
+        content: "",
         seq: 1
       }, // 收集的数据
       formLabelWidth: "120px",
 
       dialogFormVisible: false,
       isUpdate: false, //
-      index: "" //用来存放点击对应数据的表示
+      index: "", //用来存放点击对应数据的表示
+      // 表单验证
+      rules: {
+        title: [
+          { required: true, message: "请输入标题", trigger: "blur" },
+          { min: 3, max: 10, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ],
+        content: [
+          { required: true, message: "请输入内容", trigger: "blur" },
+          { min: 3, max: 30, message: "长度在 3 到 5 个字符", trigger: "blur" }
+        ]
+      }
     };
   },
   methods: {
@@ -199,36 +219,44 @@ export default {
       this.$store.dispatch("getHotsearch");
     },
     // 收集数据，添加到store中
-    addHotsearch() {
-      this.dialogFormVisible = false;
-      // 获取当前日期时间
-      let yy = new Date().getFullYear();
-      let mm = new Date().getMonth() + 1;
-      let dd = new Date().getDate();
-      let hh = new Date().getHours();
-      let mf =
-        new Date().getMinutes() < 10
-          ? "0" + new Date().getMinutes()
-          : new Date().getMinutes();
-      let ss =
-        new Date().getSeconds() < 10
-          ? "0" + new Date().getSeconds()
-          : new Date().getSeconds();
-      const recDate = yy + "-" + mm + "-" + dd + " " + hh + ":" + mf + ":" + ss;
-      let { title, status, content, seq } = this.hotInfo;
-      // 将收集的数据存储到新的对象
-      let newHotInfo = {
-        title,
-        status,
-        content,
-        seq,
-        recDate,
-        shopId: 1,
-        hotSearchId: status++
-      };
-      this.$store.commit("ADDHOTSEARCH", newHotInfo);
-      this.$message.success("添加热搜数据成功！");
-      this.hotInfo = {};
+    addHotsearch(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.dialogFormVisible = false;
+          // 获取当前日期时间
+          let yy = new Date().getFullYear();
+          let mm = new Date().getMonth() + 1;
+          let dd = new Date().getDate();
+          let hh = new Date().getHours();
+          let mf =
+            new Date().getMinutes() < 10
+              ? "0" + new Date().getMinutes()
+              : new Date().getMinutes();
+          let ss =
+            new Date().getSeconds() < 10
+              ? "0" + new Date().getSeconds()
+              : new Date().getSeconds();
+          const recDate =
+            yy + "-" + mm + "-" + dd + " " + hh + ":" + mf + ":" + ss;
+          let { title, status, content, seq } = this.hotInfo;
+          // 将收集的数据存储到新的对象
+          let newHotInfo = {
+            title,
+            status,
+            content,
+            seq,
+            recDate,
+            shopId: 1,
+            hotSearchId: status++
+          };
+          this.$store.commit("ADDHOTSEARCH", newHotInfo);
+          this.$message.success("添加热搜数据成功！");
+          this.hotInfo = {};
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
     // 修改数据
     updateHotsearch(row, index) {
@@ -277,6 +305,10 @@ export default {
     // 删除热搜数据
     delteHotInfo(index) {
       this.$store.commit("DELETEHOTSEARCH", index);
+    },
+    addNewhot() {
+      this.dialogFormVisible = true;
+      this.hotInfo = {};
     }
   },
   mounted() {
