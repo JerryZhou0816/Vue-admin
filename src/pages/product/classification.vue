@@ -156,8 +156,6 @@ export default {
     showUpdateDialog(row){
       this.isShowDialog = true
       this.goodsForm = {...row}
-      // this.$store.dispatch('addOrUpdateClassification',row)
-
     }
   },
   computed:{
